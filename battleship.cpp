@@ -254,11 +254,6 @@ void Battleship::TakeShot() {
             board.Clear();
             while (true) {
                 testShips = {};
-                /*bool ptbtRot = rng.Next() > 0.5;
-                bool subRot = rng.Next() > 0.5;
-                bool destRot = rng.Next() > 0.5;
-                bool bttlshpRot = rng.Next() > 0.5;
-                bool carrierRot = rng.Next() > 0.5;*/
                 for (Ship& p1Ship : p1Ships) {
                     if (!p1Ship.Sunk()) {
                         bool rotation = rng.Next() > 0.5;
@@ -268,42 +263,7 @@ void Battleship::TakeShot() {
                             testShips.push_back(Ship("", rotation, static_cast<int>(rng.Next() * 9), static_cast<int>(rng.Next() * (10 - static_cast<int>(p1Ship.Location().size()))), static_cast<int>(p1Ship.Location().size())));
                         }
                     }
-                }/*
-                if (!p1Ships[0].Sunk()) {
-                    if (ptbtRot) {
-                        testShips.push_back(Ship("", ptbtRot, static_cast<int>(rng.Next() * 8), static_cast<int>(rng.Next() * 9), 2));
-                    } else {
-                        testShips.push_back(Ship("", ptbtRot, static_cast<int>(rng.Next() * 9), static_cast<int>(rng.Next() * 8), 2));
-                    }
                 }
-                if (!p1Ships[1].Sunk()) {
-                    if (subRot) {
-                        testShips.push_back(Ship("", subRot, static_cast<int>(rng.Next() * 7), static_cast<int>(rng.Next() * 9), 3));
-                    } else {
-                        testShips.push_back(Ship("", subRot, static_cast<int>(rng.Next() * 9), static_cast<int>(rng.Next() * 7), 3));
-                    }
-                }
-                if (!p1Ships[2].Sunk()) {
-                    if (destRot) {
-                        testShips.push_back(Ship("", destRot, static_cast<int>(rng.Next() * 7), static_cast<int>(rng.Next() * 9), 3));
-                    } else {
-                        testShips.push_back(Ship("", destRot, static_cast<int>(rng.Next() * 9), static_cast<int>(rng.Next() * 7), 3));
-                    }
-                }
-                if (!p1Ships[3].Sunk()) {
-                    if (bttlshpRot) {
-                        testShips.push_back(Ship("", bttlshpRot, static_cast<int>(rng.Next() * 6), static_cast<int>(rng.Next() * 9), 4));
-                    } else {
-                        testShips.push_back(Ship("", bttlshpRot, static_cast<int>(rng.Next() * 9), static_cast<int>(rng.Next() * 6), 4));
-                    }
-                }
-                if (!p1Ships[4].Sunk()) {
-                    if (carrierRot) {
-                        testShips.push_back(Ship("", carrierRot, static_cast<int>(rng.Next() * 5), static_cast<int>(rng.Next() * 9), 5));
-                    } else {
-                        testShips.push_back(Ship("", carrierRot, static_cast<int>(rng.Next() * 9), static_cast<int>(rng.Next() * 5), 5));
-                    }
-                }*/
                 bool allShipsValid = true;
                 for (int i = 0; i < static_cast<int>(testShips.size()); i++) {
                     for (int j = i + 1; j < static_cast<int>(testShips.size()); j++) {
