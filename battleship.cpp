@@ -26,45 +26,61 @@ Battleship::Battleship(bool color) {
     cout << "Loading...";
     Battleship::Clear();
     DrawBoard();
+    string temp;
     for (int i = 0; i < 5; i++) {
         cout << "Place your " << Battleship::SHIP_ROLES[i] << endl << "Orientation (1 for vertical, 2 for horizontal): ";
         int rotation;
         char col = 0;
         int row = 0;
-        cin >> rotation;
+        cin >> temp;
+        rotation = temp[0] - '0';
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        while (rotation != 1 && rotation != 2) {
+            cout << "Invalid orientation. Please enter another (1 for vertical, 2 for horizontal): ";
+            cin >> temp;
+            rotation = temp[0] - '0';
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
         if (rotation == 1) {
             cout << "Choose a column for the " << Battleship::SHIP_ROLES[i] << ": ";
-            cin >> col;
+            cin >> temp;
+            col = temp[0];
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (toupper(col) - 'A' < 0 || toupper(col) - 'A' > 8) {
                 cout << "Invalid column. Please choose another column: ";
-                cin >> col;
+                cin >> temp;
+                col = temp[0];
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             cout << "Choose the topmost row of the " << Battleship::SHIP_ROLES[i] << ": ";
-            cin >> row;
+            cin >> temp;
+            row = temp[0] - '0';
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (row < 1 || row > 10 - SHIP_SIZES[i]) {
                 cout << "Invalid row. Please choose another row: ";
-                cin >> row;
+                cin >> temp;
+                row = temp[0] - '0';
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
         } else {
             cout << "Choose a row for the " << Battleship::SHIP_ROLES[i] << ": ";
-            cin >> row;
+            cin >> temp;
+            row = temp[0] - '0';
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (row < 0 || row > 9) {
                 cout << "Invalid row. Please choose another row: ";
-                cin >> row;
+                cin >> temp;
+                row = temp[0] - '0';
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             cout << "Choose the leftmost column of the " << Battleship::SHIP_ROLES[i] << ": ";
-            cin >> col;
+            cin >> temp;
+            col = temp[0];
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (toupper(col) - 'A' < 0 || toupper(col) - 'A' > 9 - SHIP_SIZES[i]) {
                 cout << "Invalid column. Please choose another column: ";
-                cin >> col;
+                cin >> temp;
+                col = temp[0];
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
         }

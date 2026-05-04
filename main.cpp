@@ -8,8 +8,10 @@ using namespace std;
 int main() {
     char useColor;
     char colorChoice;
+    string temp;
     cout << "Enable color? (y/n): ";
-    cin >> colorChoice;
+    cin >> temp;
+    colorChoice = temp[0];
     useColor = toupper(colorChoice) == 'Y';
     Battleship game = Battleship(useColor);
     bool turn = true;
@@ -20,14 +22,19 @@ int main() {
             char x;
             int y;
             cout << "Guess column: ";
-            cin >> x;
+            cin >> temp;
+            x = temp[0];
             cout << "Guess row: ";
-            cin >> y;
+            cin >> temp;
+            y = temp[0] - '0';
             while (toupper(x) - 'A' < 0 || toupper(x) - 'A' > 8 || y < 1 || y > 9 || !game.TakeShot(Point(toupper(x) - 'A', y - 1))) {
+                cout << "Invalid guess. Please enter another.\n";
                 cout << "Guess column: ";
-                cin >> x;
+                cin >> temp;
+                x = temp[0];
                 cout << "Guess row: ";
-                cin >> y;
+                cin >> temp;
+                y = temp[0] - '0';
             }
         } else {
             game.TakeShot();
