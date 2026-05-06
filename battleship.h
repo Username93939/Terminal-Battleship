@@ -12,7 +12,7 @@ public:
     Battleship(bool color);
     void DrawBoard();
     void DrawRadar();
-    bool TakeShot(Point pos);
+    bool TakeShot(const Point& pos);
     bool GameOver();
     void TakeShot();
 private:

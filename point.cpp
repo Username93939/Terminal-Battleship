@@ -10,14 +10,14 @@ Point::Point() {
     this->y = -1;
 }
 
-bool Point::Equal(Point p) {
+bool Point::Equal(const Point& p) const {
     return p.x == this->x && p.y == this->y;
 }
 
-int Point::X() {
+int Point::X() const {
     return this->x;
 }
 
-int Point::Y() {
+int Point::Y() const {
     return this->y;
 }

@@ -6,14 +6,14 @@
 
 class Ship {
 public:
-    Ship(std::string role, bool rot, int x, int y, int size);
+    Ship(const std::string& role, bool rot, int x, int y, int size);
     Ship();
-    bool Sunk();
-    bool Shot(Point loc);
-    bool ContainsPoint(Point p);
-    bool ValidLocation(Ship ship);
-    std::string Role();
-    std::vector<Point> Location();
+    bool Sunk() const;
+    bool Shot(const Point& loc);
+    bool ContainsPoint(const Point& p) const;
+    bool ValidLocation(const Ship& ship) const;
+    const std::string& Role() const;
+    const std::vector<Point>& Location() const;
 private:
     bool rotation;
     std::string role;

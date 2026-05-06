@@ -86,7 +86,7 @@ Battleship::Battleship(bool color) {
         }
         bool rot = rotation == 2;
         bool valid = true;
-        for (Ship& ship : p1Ships) {
+        for (const Ship& ship : p1Ships) {
             if (!ship.ValidLocation(Ship(Battleship::SHIP_ROLES[i], rot, toupper(col) - 'A', row - 1, Battleship::SHIP_SIZES[i]))) {
                 valid = false;
             }
@@ -113,7 +113,7 @@ Battleship::Battleship(bool color) {
             y = static_cast<int>(rng.Next() * (9 - Battleship::SHIP_SIZES[i]));
         }
         bool valid = true;
-        for (Ship& ship : p2Ships) {
+        for (const Ship& ship : p2Ships) {
             if (!ship.ValidLocation(Ship(Battleship::SHIP_ROLES[i], rotation, x, y, Battleship::SHIP_SIZES[i]))) {
                 valid = false;
             }
@@ -128,7 +128,7 @@ Battleship::Battleship(bool color) {
                 y = static_cast<int>(rng.Next() * (9 - Battleship::SHIP_SIZES[i]));
             }
             valid = true;
-            for (Ship& ship : p2Ships) {
+            for (const Ship& ship : p2Ships) {
                 if (!ship.ValidLocation(Ship(Battleship::SHIP_ROLES[i], rotation, x, y, Battleship::SHIP_SIZES[i]))) {
                     valid = false;
                 }
@@ -149,7 +149,7 @@ void Battleship::DrawBoard() {
         cout << i + 1 << " ";
         for (int j = 0; j < 9; j++) {
             char correctMark = '.';
-            for (Ship& s : p1Ships) {
+            for (const Ship& s : p1Ships) {
                 if (s.ContainsPoint(Point(j, i))) {
                     if (useColor) {
                         cout << "\033[38;2;255;255;0m";
@@ -157,7 +157,7 @@ void Battleship::DrawBoard() {
                     correctMark = '#';
                 }
             }
-            for (Point& p : p2Shots) {
+            for (const Point& p : p2Shots) {
                 if (p.Equal(Point(j, i))) {
                     if (useColor) {
                         cout << "\033[0m";
@@ -165,7 +165,7 @@ void Battleship::DrawBoard() {
                     correctMark = '@';
                 }
             }
-            for (Point& p : p2Hits) {
+            for (const Point& p : p2Hits) {
                 if (p.Equal(Point(j, i))) {
                     if (useColor) {
                         cout << "\033[38;2;255;0;0m";
@@ -193,7 +193,7 @@ void Battleship::DrawRadar() {
         cout << i + 1 << " ";
         for (int j = 0; j < 9; j++) {
             char correctMark = '.';
-            for (Point& p : p1Shots) {
+            for (const Point& p : p1Shots) {
                 if (p.Equal(Point(j, i))) {
                     if (useColor) {
                         cout << "\033[0m";
@@ -201,7 +201,7 @@ void Battleship::DrawRadar() {
                     correctMark = '@';
                 }
             }
-            for (Point& p : p1Hits) {
+            for (const Point& p : p1Hits) {
                 if (p.Equal(Point(j, i))) {
                     if (useColor) {
                         cout << "\033[38;2;255;0;0m";
@@ -219,8 +219,8 @@ void Battleship::DrawRadar() {
     cout << endl;
 }
 
-bool Battleship::TakeShot(Point pos) {
-    for (Point& shot : p1Shots) {
+bool Battleship::TakeShot(const Point& pos) {
+    for (const Point& shot : p1Shots) {
         if (shot.Equal(pos)) {
             cout << "You already guessed that!" << endl;
             return false;
@@ -270,7 +270,7 @@ void Battleship::TakeShot() {
             board.Clear();
             while (true) {
                 testShips = {};
-                for (Ship& p1Ship : p1Ships) {
+                for (const Ship& p1Ship : p1Ships) {
                     if (!p1Ship.Sunk()) {
                         bool rotation = rng.Next() > 0.5;
                         if (rotation) {
@@ -306,12 +306,12 @@ void Battleship::TakeShot() {
             }
         }
     }
-    for (Board& board : validIndex) {
+    for (const Board& board : validIndex) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 Point test = Point(i, j);
                 bool alreadyGuessed = false;
-                for (Point& p : p2Shots) {
+                for (const Point& p : p2Shots) {
                     if (test.Equal(p)) {
                         alreadyGuessed = true;                   
                     }
@@ -338,7 +338,7 @@ void Battleship::TakeShot() {
         if (ship.Shot(Point(bestX, bestY))) {
             p2Hits.push_back(Point(bestX, bestY));
             if (ship.Sunk()) {
-                for (Point& p : ship.Location()) {
+                for (const Point& p : ship.Location()) {
                     p1SunkPoints.push_back(p);
                 }
             }
@@ -351,12 +351,12 @@ void Battleship::TakeShot() {
 bool Battleship::GameOver() {
     bool gameOverP1 = true;
     bool gameOverP2 = true;
-    for (Ship& ship : p1Ships) {
+    for (const Ship& ship : p1Ships) {
         if (!ship.Sunk()) {
             gameOverP1 = false;
         }
     }
-    for (Ship& ship : p2Ships) {
+    for (const Ship& ship : p2Ships) {
         if (!ship.Sunk()) {
             gameOverP2 = false;
         }

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Ship::Ship(string role, bool rot, int x, int y, int size) {
+Ship::Ship(const string& role, bool rot, int x, int y, int size) {
     this->role = role;
     this->rotation = rot;
     this->sunk = false;
@@ -19,11 +19,11 @@ Ship::Ship() {
     Ship("", false, -1, -1, 0);
 }
 
-bool Ship::Sunk() {
+bool Ship::Sunk() const {
     return this->sunk;
 }
 
-bool Ship::Shot(Point loc) {
+bool Ship::Shot(const Point& loc) {
     for (int i = 0; i < hits.size(); i++) {
         if (points[i].Equal(loc)) {
             hits[i] = true;
@@ -40,8 +40,8 @@ bool Ship::Shot(Point loc) {
     return false;
 }
 
-bool Ship::ContainsPoint(Point p) {
-    for (Point& loc : points) {
+bool Ship::ContainsPoint(const Point& p) const {
+    for (const Point& loc : points) {
         if (loc.Equal(p)) {
             return true;
         }
@@ -49,9 +49,9 @@ bool Ship::ContainsPoint(Point p) {
     return false;
 }
 
-bool Ship::ValidLocation(Ship ship) {
-    for (Point& a : points) {
-        for (Point& b : ship.points) {
+bool Ship::ValidLocation(const Ship& ship) const {
+    for (const Point& a : points) {
+        for (const Point& b : ship.points) {
             if (a.Equal(b)) {
                 return false;
             }
@@ -60,10 +60,10 @@ bool Ship::ValidLocation(Ship ship) {
     return true;
 }
 
-string Ship::Role() {
+const string& Ship::Role() const {
     return this->role;
 }
 
-vector<Point> Ship::Location() {
+const vector<Point>& Ship::Location() const {
     return this->points;
 }

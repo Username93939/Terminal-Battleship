@@ -4,9 +4,9 @@ class Point {
 public:
     Point(int x, int y);
     Point();
-    bool Equal(Point p);
-    int X();
-    int Y();
+    bool Equal(const Point& p) const;
+    int X() const;
+    int Y() const;
 private:
     int x;
     int y;

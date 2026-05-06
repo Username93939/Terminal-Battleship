@@ -7,10 +7,10 @@
 class Board {
 public:
     Board();
-    Board(std::vector<Point> hits, std::vector<Point> shots, std::vector<Point> sunkPoints);
-    bool FitData(Board& b);
-    bool IsHit(Point& p);
-    bool AddShip(Ship& ship);
+    Board(const std::vector<Point>& hits, const std::vector<Point>& shots, const std::vector<Point>& sunkPoints);
+    bool FitData(const Board& b) const;
+    bool IsHit(const Point& p) const;
+    bool AddShip(const Ship& ship);
     void Clear();
 private:
     bool hitmap[9][9];
